@@ -1,1 +1,110 @@
-<p>dialog-agregar-alumno works!</p>
+<h2 mat-dialog-title>
+
+{{ data.alumno ? 'Editar alumno' : 'Nuevo alumno' }}
+
+</h2>
+
+
+
+<mat-dialog-content class="dialog-content">
+
+
+<mat-form-field appearance="outline">
+
+<mat-label>
+Nombre
+</mat-label>
+
+<input 
+matInput
+[(ngModel)]="nombre"
+placeholder="Nombre">
+
+
+</mat-form-field>
+
+
+
+
+<mat-form-field appearance="outline">
+
+<mat-label>
+Email
+</mat-label>
+
+
+<input
+matInput
+[(ngModel)]="email"
+placeholder="Email">
+
+
+</mat-form-field>
+
+
+
+
+
+<mat-form-field appearance="outline">
+
+<mat-label>
+Materia
+</mat-label>
+
+
+
+<mat-select 
+[(ngModel)]="materiaId"
+name="materia">
+
+
+<mat-option 
+*ngFor="let materia of materias"
+[value]="materia.id">
+
+
+{{materia.nombre}}
+
+
+</mat-option>
+
+
+</mat-select>
+
+
+</mat-form-field>
+
+
+</mat-dialog-content>
+
+
+
+
+<mat-dialog-actions align="end">
+
+
+<button 
+class="cancelar"
+mat-button
+(click)="cancelar()">
+
+Cancelar
+
+</button>
+
+
+
+<button
+class="guardar"
+mat-raised-button
+(click)="confirmar()"
+[disabled]="!nombre || !materiaId">
+
+
+{{ data.alumno ? 'Guardar' : 'Agregar' }}
+
+
+</button>
+
+
+</mat-dialog-actions>

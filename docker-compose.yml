@@ -1,0 +1,53 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:?Define MSSQL_SA_PASSWORD en .env}
+    ports:
+      - "127.0.0.1:${SQL_PORT:-1433}:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+      ConnectionStrings__Con: "Server=db,1433;Database=MiPrimeraBaseDeDatos;User Id=sa;Password=${MSSQL_SA_PASSWORD:?Define MSSQL_SA_PASSWORD en .env};TrustServerCertificate=True;Encrypt=False"
+      Jwt__Key: ${JWT_KEY:?Define JWT_KEY en .env con al menos 32 caracteres}
+      AdminBootstrap__Name: ${ADMIN_BOOTSTRAP_NAME:-}
+      AdminBootstrap__Email: ${ADMIN_BOOTSTRAP_EMAIL:-}
+      AdminBootstrap__Password: ${ADMIN_BOOTSTRAP_PASSWORD:-}
+    ports:
+      - "127.0.0.1:${API_PORT:-5201}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./TestAngular
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:${WEB_PORT:-4200}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:

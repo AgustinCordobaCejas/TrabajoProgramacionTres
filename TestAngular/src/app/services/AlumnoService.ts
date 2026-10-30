@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Alumno } from '../interfaces/Alumno';
 import { CrearAlumnoDto } from '../interfaces/CrearAlumnoDto';
+import { environment } from '../../environments/environment';
+import { PagedResult } from '../interfaces/PagedResult';
 
 
 @Injectable({
@@ -11,9 +12,7 @@ import { CrearAlumnoDto } from '../interfaces/CrearAlumnoDto';
 })
 export class alumnosService {
 
-  private ApiUrl: string = `${environment.apiUrl}/Alumno`;
-
-  // https://localhost:7124/api
+  private readonly apiUrl = `${environment.apiUrl}/Alumno`;
 
 
   constructor(
@@ -23,34 +22,35 @@ export class alumnosService {
   ) { }
 
 
-  getAll(): Observable<Alumno[]> {
-
-    return this.http.get<Alumno[]>(this.ApiUrl);
+  getAll(page: number, pageSize: number, filter: string): Observable<PagedResult<Alumno>> {
+    return this.http.get<PagedResult<Alumno>>(this.apiUrl, {
+      params: { page, pageSize, filter },
+    });
 
   }
 
 
   getById(id: number): Observable<Alumno> {
 
-    return this.http.get<Alumno>(`${this.ApiUrl}/${id}`);
+    return this.http.get<Alumno>(`${this.apiUrl}/${id}`);
 
   }
 
   create(alumno: CrearAlumnoDto): Observable<Alumno> {
 
-    return this.http.post<Alumno>(this.ApiUrl, alumno);
+    return this.http.post<Alumno>(this.apiUrl, alumno);
 
   }
 
   update(id: number, alumno: CrearAlumnoDto): Observable<void> {
 
-    return this.http.put<void>(`${this.ApiUrl}/${id}`, alumno);
+    return this.http.put<void>(`${this.apiUrl}/${id}`, alumno);
 
   }
 
   delete(id: number): Observable<void> {
 
-    return this.http.delete<void>(`${this.ApiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
     
   }
 

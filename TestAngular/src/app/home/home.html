@@ -1,12 +1,80 @@
-<div class="contenedor">
-    <div class="mini-contenedor">
+<div class="animated-gradient">
 
-        <button routerLink="/dashboardA" > Dashboard A </button>
-        <button  (click)="navegarAlDashboardB()"> Dashboard B </button>
-        <button matButton (click)="navegarAlDashboardC()" >Basic</button>
-        
 
-    </div>
+<div class="particles"></div>
+
+
+
+<div class="home-container">
+
+
+<div class="home-card">
+
+
+
+<h1>
+Panel Principal
+</h1>
+
+
+
+<p>
+Selecciona una sección para continuar
+</p>
+
+
+
+
+<div class="buttons-container">
+
+
+
+<button routerLink="/dashboardA">
+
+Alumnos
+
+</button>
+
+
+
+
+<!-- SOLO ADMIN -->
+
+<button
+
+*ngIf="esAdmin"
+
+(click)="navegarAlDashboardB()">
+
+Materias
+
+</button>
+
+
+
+
+
+<!-- SOLO ADMIN -->
+
+<button
+class="logout-button"
+(click)="cerrarSesion()">
+
+Cerrar Sesión
+
+</button>
+
+
+
 </div>
 
 
+
+</div>
+
+
+
+</div>
+
+
+</div>

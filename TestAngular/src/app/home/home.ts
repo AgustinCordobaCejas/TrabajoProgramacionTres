@@ -1,47 +1,125 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+
+import { AuthService } from '../auth/auth.service';
 
 
 
 @Component({
-  selector: 'app-home',
-  standalone:true,
-  imports: [
-    RouterModule,
-    MatButtonModule
-    
-  ],
 
-  templateUrl: './home.html',
-  styleUrl: './home.scss',
+selector:'app-home',
+
+standalone:true,
+
+
+imports:[
+
+RouterModule,
+MatButtonModule,
+CommonModule
+
+],
+
+
+templateUrl:'./home.html',
+
+styleUrl:'./home.scss'
+
 })
+
+
 export class Home {
 
-  constructor(
-
-    private router: Router
 
 
-  ) 
-
-  {
-
-  }
+esAdmin:boolean=false;
 
 
-  //SE PUEDE NAVEGAR DE LAS DOS FORMAS ROUTERLINK, ES MAS SIMPLE Y DECLARATIVO O CON EL NAVITAGE PERO NECESITAS LOGICA ANTES EJ VALIDACIONES.
 
-  navegarAlDashboardB() {
+constructor(
 
-    this.router.navigate(['/dashboardB'])
-    
-  }
+private router:Router,
 
-  navegarAlDashboardC(){
+private authService:AuthService
 
-    this.router.navigate(['/dashboardC'])
-    
-  }
+){
+
+
+this.esAdmin =
+this.authService.esAdmin();
+
+
+
+console.log(
+"Rol usuario:",
+this.authService.obtenerRol()
+);
+
+
+
+}
+
+
+
+
+
+
+navegarAlDashboardB(){
+
+
+this.router.navigate([
+'/dashboardB'
+]);
+
+
+}
+
+
+
+
+navegarAlDashboardC(){
+
+
+this.router.navigate([
+'/dashboardC'
+]);
+
+
+}
+
+
+
+
+
+cerrarSesion(){
+
+
+ console.log(
+  "ANTES:",
+  localStorage.getItem('token')
+ );
+
+
+ this.authService.logout();
+
+
+ console.log(
+  "DESPUES:",
+  localStorage.getItem('token')
+ );
+
+
+ this.router.navigate(['/login'])
+ .then(()=>{
+
+   window.location.reload();
+
+ });
+
+
+}
+
 
 }

@@ -1,0 +1,228 @@
+.animated-gradient {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: linear-gradient(
+        45deg,
+        #667eea,
+        #764ba2,
+        #f093fb
+    );
+
+    background-size: 200% 200%;
+
+    animation: gradient-shift 8s ease infinite;
+
+}
+
+
+.contenedor {
+
+    width: 420px;
+
+    padding: 40px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,.15);
+
+    text-align: center;
+
+}
+
+
+.contenedor h2 {
+
+    color: #1f2937;
+
+    margin-bottom: 25px;
+
+}
+
+
+form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+input {
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    border: 1px solid #ddd;
+
+    font-size: 15px;
+
+}
+
+
+input:focus {
+
+    outline: none;
+
+    border-color: #667eea;
+
+}
+
+
+button {
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #667eea;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+button:hover {
+
+    background:#764ba2;
+
+}
+
+
+a {
+
+    color:#667eea;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+
+@keyframes gradient-shift {
+
+    0% {
+        background-position:0% 50%;
+    }
+
+    50% {
+        background-position:100% 50%;
+    }
+
+    100% {
+        background-position:0% 50%;
+    }
+
+}
+/* Contenedor principal */
+.animated-gradient {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    width: 100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:linear-gradient(
+        45deg,
+        #667eea,
+        #764ba2,
+        #f093fb
+    );
+
+    background-size:200% 200%;
+
+    animation:gradient-shift 8s ease infinite;
+
+}
+
+
+/* Capa de partículas */
+.particles {
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background-image:
+        radial-gradient(
+            white 2px,
+            transparent 2px
+        );
+
+    background-size:40px 40px;
+
+    opacity:.25;
+
+    animation:
+        particles-move 15s linear infinite;
+
+    z-index:0;
+
+}
+
+
+
+
+@keyframes particles-move {
+
+
+    from {
+
+        transform:translateY(0);
+
+    }
+
+
+    to {
+
+        transform:translateY(-100px);
+
+    }
+
+
+}
+
+
+
+
+
+/* Mantiene tu tarjeta por encima */
+.flip-container {
+
+    position:relative;
+
+    z-index:1;
+
+}

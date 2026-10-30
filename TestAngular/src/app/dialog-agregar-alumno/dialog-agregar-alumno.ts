@@ -94,13 +94,14 @@ export class AlumnoDialogComponent implements OnInit {
     if (data.alumno) {
       this.nombre    = data.alumno.nombre;      
       this.email = data.alumno.email;
+      this.materiaId = data.alumno.materiaId;
   
     }
   }
 
   ngOnInit(): void {
-    this.materiaService.getAll().subscribe({
-      next: (data) => this.materias = data,
+    this.materiaService.getAll(1, 100, '').subscribe({
+      next: (data) => this.materias = data.items,
       error: (err) => console.error('Error al cargar materias', err)
     });
   }

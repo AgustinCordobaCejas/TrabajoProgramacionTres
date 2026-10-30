@@ -1,0 +1,586 @@
+body{
+  margin:0;
+  font-family:'Geist Mono','Courier New',monospace;
+}
+
+
+/* =====================================
+   FONDO ANIMADO NEON
+===================================== */
+
+.animated-gradient{
+
+  min-height:100vh;
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+  overflow:hidden;
+
+
+  background:
+  radial-gradient(circle at top,#ff0055,#090014 45%),
+  linear-gradient(
+    45deg,
+    #050014,
+    #14002b,
+    #001f3f
+  );
+
+
+  background-size:200% 200%;
+
+  animation:
+  neonBackground 10s ease infinite;
+
+}
+
+
+@keyframes neonBackground{
+
+0%{
+ background-position:0% 50%;
+}
+
+50%{
+ background-position:100% 50%;
+}
+
+100%{
+ background-position:0% 50%;
+}
+
+}
+
+
+
+/* =====================================
+   PARTICULAS
+===================================== */
+
+
+.particles{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background-image:
+
+radial-gradient(
+rgba(255,255,255,.8) 1px,
+transparent 2px
+);
+
+
+background-size:40px 40px;
+
+
+opacity:.25;
+
+
+animation:
+moveParticles 18s linear infinite;
+
+
+}
+
+
+
+@keyframes moveParticles{
+
+from{
+
+transform:translateY(0);
+
+}
+
+
+to{
+
+transform:translateY(-150px);
+
+}
+
+}
+
+
+
+/* =====================================
+   TARJETA FLIP
+===================================== */
+
+
+.flip-container{
+
+width:420px;
+height:520px;
+
+perspective:1200px;
+
+position:relative;
+
+z-index:2;
+
+}
+
+
+
+.card{
+
+width:100%;
+height:100%;
+
+position:relative;
+
+transform-style:preserve-3d;
+
+transition:
+transform .9s cubic-bezier(.4,0,.2,1);
+
+}
+
+
+
+.flip-container.flipped .card{
+
+transform:
+rotateY(180deg);
+
+}
+
+
+
+
+/* =====================================
+   LOGIN / REGISTRO
+===================================== */
+
+
+.front,
+.back{
+
+
+position:absolute;
+
+
+width:100%;
+height:100%;
+
+
+padding:45px;
+
+
+box-sizing:border-box;
+
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+
+
+border-radius:30px;
+
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+
+border:
+
+1px solid rgba(255,255,255,.25);
+
+
+
+backdrop-filter:
+
+blur(25px);
+
+
+
+-webkit-backdrop-filter:
+
+blur(25px);
+
+
+
+box-shadow:
+
+
+0 25px 60px rgba(0,0,0,.6),
+
+
+inset 0 0 30px rgba(255,255,255,.08);
+
+
+
+backface-visibility:hidden;
+
+
+
+overflow:hidden;
+
+
+
+}
+
+
+
+
+.front::before,
+.back::before{
+
+
+content:"";
+
+
+position:absolute;
+
+inset:0;
+
+
+
+background:
+
+linear-gradient(
+135deg,
+rgba(255,255,255,.25),
+transparent 50%
+);
+
+
+
+pointer-events:none;
+
+
+}
+
+
+
+
+.back{
+
+
+transform:
+
+rotateY(180deg);
+
+}
+
+
+
+
+
+/* =====================================
+   TITULO
+===================================== */
+
+
+h1{
+
+
+color:white;
+
+
+font-size:34px;
+
+
+letter-spacing:.15em;
+
+
+text-transform:uppercase;
+
+
+text-shadow:
+
+0 0 20px rgba(255,0,150,.8);
+
+
+margin-bottom:35px;
+
+
+}
+
+
+
+
+/* =====================================
+   FORMULARIO
+===================================== */
+
+
+form{
+
+
+width:100%;
+
+
+display:flex;
+
+flex-direction:column;
+
+
+gap:18px;
+
+
+}
+
+
+
+input{
+
+
+width:100%;
+
+box-sizing:border-box;
+
+
+padding:15px;
+
+
+border-radius:15px;
+
+
+border:none;
+
+
+outline:none;
+
+
+
+background:
+
+rgba(255,255,255,.12);
+
+
+
+color:white;
+
+
+
+font-size:15px;
+
+
+
+border:
+
+1px solid rgba(255,255,255,.25);
+
+
+
+transition:.3s;
+
+
+
+}
+
+
+
+
+input::placeholder{
+
+color:
+
+rgba(255,255,255,.65);
+
+}
+
+
+
+input:focus{
+
+
+background:
+
+rgba(255,255,255,.20);
+
+
+
+box-shadow:
+
+0 0 20px rgba(0,255,255,.4);
+
+
+
+}
+
+
+
+/* =====================================
+   BOTON
+===================================== */
+
+
+button{
+
+
+width:100%;
+
+margin-top:15px;
+
+padding:15px;
+
+border:none;
+
+border-radius:15px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#ff0055,
+#8a2be2,
+#00faff
+);
+
+
+
+background-size:200%;
+
+
+color:white;
+
+
+font-size:16px;
+
+
+font-weight:bold;
+
+
+cursor:pointer;
+
+
+
+transition:.4s;
+
+
+
+}
+
+
+
+button:hover{
+
+
+transform:
+
+translateY(-5px)
+scale(1.03);
+
+
+
+background-position:
+
+100%;
+
+
+
+box-shadow:
+
+0 0 30px rgba(0,255,255,.8);
+
+
+}
+
+
+
+
+/* =====================================
+   TEXTOS
+===================================== */
+
+
+p{
+
+
+color:
+
+rgba(255,255,255,.85);
+
+
+text-align:center;
+
+
+margin-top:25px;
+
+
+}
+
+
+
+a{
+
+
+color:#00faff;
+
+
+font-weight:bold;
+
+
+cursor:pointer;
+
+
+text-decoration:none;
+
+
+}
+
+
+
+a:hover{
+
+
+color:white;
+
+
+text-shadow:
+
+0 0 15px #00faff;
+
+
+}
+
+
+
+.error{
+
+
+color:#ff8080;
+
+
+}
+
+
+
+/* =====================================
+ RESPONSIVE
+===================================== */
+
+
+@media(max-width:500px){
+
+
+.flip-container{
+
+width:90%;
+
+height:520px;
+
+
+}
+
+
+}

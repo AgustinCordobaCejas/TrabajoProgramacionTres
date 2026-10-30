@@ -1,9 +1,489 @@
-.contenedor{
+body{
 
-    height: 100px;
-    width: 100%;
+    margin:0;
+
+    font-family:'Geist Mono','Courier New',monospace;
+
+}
 
 
-    background-color: lightcoral;
+/* =====================================
+   HEADER NEON
+===================================== */
+
+
+.header{
+
+
+    width:100%;
+
+    height:120px;
+
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+
+    position:relative;
+
+    overflow:hidden;
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle at top,
+
+        #ff0055,
+
+        #090014 45%
+
+    ),
+
+
+
+    linear-gradient(
+
+        45deg,
+
+        #050014,
+
+        #14002b,
+
+        #001f3f
+
+    );
+
+
+
+    background-size:200% 200%;
+
+
+
+    animation:
+
+    neonHeader 10s ease infinite;
+
+
+
+}
+
+
+
+
+
+@keyframes neonHeader{
+
+
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+
+
+    50%{
+
+        background-position:100% 50%;
+
+    }
+
+
+
+    100%{
+
+        background-position:0% 50%;
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   PARTICULAS
+===================================== */
+
+
+.header::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:100%;
+
+    height:100%;
+
+
+
+    background-image:
+
+
+    radial-gradient(
+
+        rgba(255,255,255,.8) 1px,
+
+        transparent 2px
+
+    );
+
+
+
+    background-size:40px 40px;
+
+
+
+    opacity:.25;
+
+
+
+    animation:
+
+    moveHeaderParticles 18s linear infinite;
+
+
+
+}
+
+
+
+
+
+
+@keyframes moveHeaderParticles{
+
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+
+
+    to{
+
+        transform:translateY(-150px);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   CONTENIDO HEADER
+===================================== */
+
+
+.header-content{
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+
+    text-align:center;
+
+
+
+    padding:25px 45px;
+
+
+
+    border-radius:25px;
+
+
+
+    background:
+
+
+    rgba(255,255,255,.08);
+
+
+
+    border:
+
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+    backdrop-filter:
+
+
+    blur(20px);
+
+
+
+    -webkit-backdrop-filter:
+
+
+    blur(20px);
+
+
+
+
+    box-shadow:
+
+
+
+    0 20px 50px rgba(0,0,0,.6),
+
+
+
+    inset 0 0 25px rgba(255,255,255,.08);
+
+
+
+    animation:
+
+
+    headerEntrada .7s ease;
+
+
+
+}
+
+
+
+
+
+
+
+/* brillo interno */
+
+
+.header-content::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        rgba(255,255,255,.25),
+
+        transparent 50%
+
+    );
+
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+
+
+
+
+@keyframes headerEntrada{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+        translateY(-40px);
+
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+        translateY(0);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   TITULO
+===================================== */
+
+
+.header-content h1{
+
+
+    margin:0;
+
+
+
+    color:white;
+
+
+
+    font-size:30px;
+
+
+
+    letter-spacing:.15em;
+
+
+
+    text-transform:uppercase;
+
+
+
+    font-weight:700;
+
+
+
+    text-shadow:
+
+
+
+    0 0 15px rgba(255,0,150,.8),
+
+
+    0 0 35px rgba(0,255,255,.5);
+
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   TEXTO
+===================================== */
+
+
+.header-content p{
+
+
+    margin:8px 0 0;
+
+
+
+    color:
+
+
+    rgba(255,255,255,.85);
+
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+
+@media(max-width:700px){
+
+
+    .header{
+
+
+        height:150px;
+
+    }
+
+
+
+    .header-content{
+
+
+        width:90%;
+
+        padding:20px;
+
+
+    }
+
+
+
+    .header-content h1{
+
+
+        font-size:20px;
+
+
+        letter-spacing:.08em;
+
+
+    }
+
 
 }

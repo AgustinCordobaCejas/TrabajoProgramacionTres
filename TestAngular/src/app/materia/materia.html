@@ -1,31 +1,202 @@
-<button mat-raised-button color="primary" (click)="agregarMateria()">
-  Nueva Materia
-</button>
-
-<table mat-table [dataSource]="materia" class="mat-elevation-z8">
-
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> id </th>
-
-    <td mat-cell *matCellDef="let materia"> {{ materia.id }} </td>
-
-  </ng-container>
-
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> nombre </th>
-    <td mat-cell *matCellDef="let materia"> {{ materia.nombre }} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="acciones">
-    <th mat-header-cell *matHeaderCellDef> acciones </th>
-    <td mat-cell *matCellDef="let materia">      
-      <button mat-button color="primary" (click)="editarMateria(materia)">Editar</button>
-      <button mat-button color="warn"    (click)="eliminar(materia)">Eliminar</button>
-    </td>
-  </ng-container>
+<div class="animated-gradient">
 
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <!-- Fondo partículas -->
+  <div class="particles"></div>
 
-</table>
+
+
+  <div class="materia-container">
+
+
+    <div class="materia-card">
+
+
+
+      <h1>
+        Gestión de Materias
+      </h1>
+
+
+
+      <p>
+        Administración académica del sistema
+      </p>
+
+
+
+
+      <button
+      *ngIf="esAdmin"
+      mat-raised-button
+      color="primary"
+      (click)="agregarMateria()">
+
+        + Nueva Materia
+
+      </button>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Filtrar materias</mat-label>
+        <input matInput [(ngModel)]="filtro" (ngModelChange)="aplicarFiltro($event)" placeholder="Nombre de la materia">
+      </mat-form-field>
+
+
+
+      <div class="table-box">
+
+
+        <table 
+        mat-table 
+        [dataSource]="materia">
+
+
+
+
+
+          <!-- ID -->
+
+          <ng-container matColumnDef="id">
+
+            <th mat-header-cell *matHeaderCellDef>
+
+              ID
+
+            </th>
+
+
+            <td mat-cell *matCellDef="let materia">
+
+              {{materia.id}}
+
+            </td>
+
+          </ng-container>
+
+
+
+
+
+
+          <!-- NOMBRE -->
+
+
+          <ng-container matColumnDef="nombre">
+
+            <th mat-header-cell *matHeaderCellDef>
+
+              Nombre
+
+            </th>
+
+
+            <td mat-cell *matCellDef="let materia">
+
+              {{materia.nombre}}
+
+            </td>
+
+
+          </ng-container>
+
+
+
+
+
+
+
+          <!-- ACCIONES -->
+
+
+          <ng-container matColumnDef="acciones">
+
+
+            <th mat-header-cell *matHeaderCellDef>
+
+              Acciones
+
+            </th>
+
+
+
+            <td mat-cell *matCellDef="let materia">
+
+
+              <button
+              *ngIf="esAdmin"
+              mat-button
+              color="primary"
+              (click)="editarMateria(materia)">
+
+                Editar
+
+              </button>
+
+
+
+
+              <button
+              *ngIf="esAdmin"
+              mat-button
+              color="warn"
+              (click)="eliminar(materia)">
+
+                Eliminar
+
+              </button>
+
+
+            </td>
+
+
+
+          </ng-container>
+
+
+
+
+
+
+
+          <tr 
+          mat-header-row 
+          *matHeaderRowDef="displayedColumns">
+
+          </tr>
+
+
+
+          <tr 
+          mat-row 
+          *matRowDef="let row; columns:displayedColumns">
+
+          </tr>
+
+
+
+
+
+        </table>
+
+        <mat-paginator
+          [length]="totalCount"
+          [pageIndex]="pageIndex"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          showFirstLastButtons
+          (page)="cambiarPagina($event)">
+        </mat-paginator>
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+</div>

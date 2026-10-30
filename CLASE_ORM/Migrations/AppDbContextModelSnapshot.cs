@@ -81,6 +81,31 @@ namespace CLASE_ORM.Migrations
                     b.ToTable("Profesores");
                 });
 
+            modelBuilder.Entity("CLASE_ORM.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
+                });
+
             modelBuilder.Entity("CLASE_ORM.Entities.Alumno", b =>
                 {
                     b.HasOne("CLASE_ORM.Entities.Materia", "Materia")

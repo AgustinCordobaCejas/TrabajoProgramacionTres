@@ -1,69 +1,51 @@
-﻿using CLASE_ORM.Entities;
 using CLASE_ORM.Entities.DTO.Materia;
 using CLASE_ORM.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-namespace CLASE_ORM.Controllers
+namespace CLASE_ORM.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+[Authorize]
+public sealed class MateriaController(IMateriaService service) : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MateriaController : ControllerBase
+    [HttpGet]
+    public async Task<IActionResult> GetAll(
+        [FromQuery, Range(1, int.MaxValue)] int page = 1,
+        [FromQuery, Range(1, 100)] int pageSize = 10,
+        [FromQuery] string? filter = null)
     {
-        private readonly IMateriaService _service;
+        var result = await service.GetPageAsync(filter, page, pageSize);
+        return Ok(result);
+    }
 
-        public MateriaController(IMateriaService service)
-        {
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id) =>
+        Ok(await service.GetByIdAsync(id));
 
-            _service = service;
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Create(CrearMateriaDto dto)
+    {
+        var created = await service.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+    }
 
-        }
+    [HttpPut("{id:int}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Update(int id, ActualizarMateriaDto dto)
+    {
+        await service.UpdateAsync(id, dto);
+        return NoContent();
+    }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-
-            var materias = await _service.GetAllAsync();
-            return Ok(materias);
-
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-
-            var materia = await _service.GetByIdAsync(id);
-            if (materia == null) return NotFound();
-            return Ok(materia);
-
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(CrearMateriaDto dto)
-        {
-
-            var created = await _service.CreateAsync(dto);
-            return Ok(created);
-
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Materia materia)
-        {
-
-            var updated = await _service.UpdateAsync(id, materia);
-            if (!updated) return NotFound();
-            return NoContent();
-
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-
-            var deleted = await _service.DeleteAsync(id);
-            if (!deleted) return NotFound();
-            return NoContent();
-
-        }
+    [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await service.DeleteAsync(id);
+        return NoContent();
     }
 }

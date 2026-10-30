@@ -1,0 +1,33 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY CLASE_ORM/global.json ./
+COPY CLASE_ORM/CLASE_ORM.csproj CLASE_ORM/
+COPY CLASE_ORM.Domain/CLASE_ORM.Domain.csproj CLASE_ORM.Domain/
+COPY CLASE_ORM.Application/CLASE_ORM.Application.csproj CLASE_ORM.Application/
+COPY CLASE_ORM.Infrastructure/CLASE_ORM.Infrastructure.csproj CLASE_ORM.Infrastructure/
+RUN dotnet restore CLASE_ORM/CLASE_ORM.csproj
+
+COPY . .
+RUN dotnet publish CLASE_ORM/CLASE_ORM.csproj \
+    --configuration Release \
+    --no-restore \
+    --output /app/publish \
+    /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+RUN apt-get update \
+    && apt-get install --no-install-recommends --yes curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY --from=build /app/publish .
+
+ENV ASPNETCORE_HTTP_PORTS=8080
+EXPOSE 8080
+USER $APP_UID
+
+HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=12 \
+    CMD curl --fail --silent http://localhost:8080/health || exit 1
+
+ENTRYPOINT ["dotnet", "CLASE_ORM.dll"]

@@ -1,7 +1,776 @@
-.contenedor{
+body{
 
-    height: 75vh;
+    margin:0;
 
-    background-color: rgb(179, 142, 142);
+    font-family:'Geist Mono','Courier New',monospace;
+
+}
+
+
+
+/* =====================================
+   FONDO NEON PRINCIPAL
+===================================== */
+
+
+.animated-gradient{
+
+
+    min-height:100vh;
+
+    width:100%;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    position:relative;
+
+    overflow:hidden;
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle at top,
+
+        #ff0055,
+
+        #090014 45%
+
+    ),
+
+
+
+    linear-gradient(
+
+        45deg,
+
+        #050014,
+
+        #14002b,
+
+        #001f3f
+
+    );
+
+
+
+    background-size:200% 200%;
+
+
+    animation:
+
+    neonBackground 10s ease infinite;
+
+
+}
+
+
+
+@keyframes neonBackground{
+
+
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+
+    50%{
+
+        background-position:100% 50%;
+
+    }
+
+
+    100%{
+
+        background-position:0% 50%;
+
+    }
+
+
+}
+
+
+
+/* =====================================
+   PARTICULAS
+===================================== */
+
+
+.particles{
+
+
+    position:absolute;
+
+    inset:0;
+
+
+    background-image:
+
+
+    radial-gradient(
+
+        rgba(255,255,255,.8) 1.5px,
+
+        transparent 2px
+
+    );
+
+
+    background-size:
+
+    45px 45px;
+
+
+
+    opacity:.20;
+
+
+
+    animation:
+
+    particleMove 18s linear infinite;
+
+
+}
+
+
+
+@keyframes particleMove{
+
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+
+    to{
+
+        transform:translateY(-150px);
+
+    }
+
+
+}
+
+
+
+/* =====================================
+   CONTENEDOR
+===================================== */
+
+
+.home-container{
+
+
+    position:relative;
+
+    z-index:2;
+
+
+    width:90%;
+
+
+    display:flex;
+
+    justify-content:center;
+
+
+}
+
+
+
+/* =====================================
+   TARJETA GLASS NEON
+===================================== */
+
+
+.home-card{
+
+
+    width:520px;
+
+
+    padding:55px;
+
+
+    border-radius:30px;
+
+
+
+    text-align:center;
+
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+
+    background:
+
+
+    rgba(255,255,255,.12);
+
+
+
+    backdrop-filter:
+
+    blur(25px);
+
+
+
+    -webkit-backdrop-filter:
+
+    blur(25px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+
+    box-shadow:
+
+
+
+    0 30px 80px rgba(0,0,0,.45),
+
+
+    inset 0 1px 0 rgba(255,255,255,.4);
+
+
+
+    animation:
+
+    entrada .8s ease;
+
+
+
+    transition:.5s;
+
+
+}
+
+
+
+/* brillo interno */
+
+
+.home-card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        rgba(255,255,255,.35),
+
+        transparent 40%
+
+    );
+
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+/* borde neon */
+
+
+.home-card::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:-2px;
+
+
+    border-radius:32px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        90deg,
+
+        #00ffff,
+
+        #8b5cf6,
+
+        #ec4899,
+
+        #00ffff
+
+    );
+
+
+
+    background-size:300%;
+
+
+
+    animation:
+
+    neonBorder 5s linear infinite;
+
+
+
+    filter:blur(18px);
+
+
+
+    opacity:.45;
+
+
+
+    z-index:-1;
+
+
+}
+
+
+
+
+@keyframes neonBorder{
+
+
+    from{
+
+        background-position:0%;
+
+    }
+
+
+    to{
+
+        background-position:300%;
+
+    }
+
+
+}
+
+
+
+/* =====================================
+   EFECTO 3D
+===================================== */
+
+
+.home-card:hover{
+
+
+    transform:
+
+
+    translateY(-15px)
+
+    rotateX(6deg)
+
+    rotateY(-6deg);
+
+
+
+    box-shadow:
+
+
+    0 40px 90px rgba(0,0,0,.6);
+
+
+}
+
+
+
+/* =====================================
+   ENTRADA
+===================================== */
+
+
+@keyframes entrada{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+        translateY(40px);
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+        translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+/* =====================================
+   TITULO
+===================================== */
+
+
+h1{
+
+
+    color:white;
+
+
+    font-size:38px;
+
+
+    margin-bottom:20px;
+
+
+
+    letter-spacing:.15em;
+
+
+    text-transform:uppercase;
+
+
+
+    text-shadow:
+
+
+    0 0 20px rgba(255,0,150,.8);
+
+
+}
+
+
+
+
+p{
+
+
+    color:
+
+
+    rgba(255,255,255,.85);
+
+
+
+    font-size:18px;
+
+
+}
+
+
+
+/* =====================================
+   BOTONES
+===================================== */
+
+
+.buttons-container{
+
+
+    margin-top:40px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:22px;
+
+
+}
+
+
+
+
+
+button{
+
+
+    position:relative;
+
+
+    padding:16px;
+
+
+
+    border:none;
+
+
+    border-radius:15px;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #ff0055,
+
+        #8a2be2,
+
+        #00faff
+
+    );
+
+
+
+    color:white;
+
+
+
+    font-size:18px;
+
+
+    font-weight:bold;
+
+
+
+    cursor:pointer;
+
+
+
+    overflow:hidden;
+
+
+
+    transition:.4s;
+
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,255,255,.35);
+
+
+}
+
+
+
+
+
+button:hover{
+
+
+    transform:
+
+
+    translateY(-5px)
+
+    scale(1.03);
+
+
+
+    box-shadow:
+
+
+    0 20px 40px rgba(0,255,255,.55);
+
+
+}
+
+
+
+/* efecto luz */
+
+
+button::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:-100%;
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+
+    background:
+
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.5),
+
+        transparent
+
+    );
+
+
+
+    transition:.6s;
+
+
+}
+
+
+
+
+button:hover::before{
+
+
+    left:100%;
+
+
+}
+
+
+
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+
+.logout-button{
+
+
+    background:
+
+
+    linear-gradient(
+
+        135deg,
+
+        #ef4444,
+
+        #991b1b
+
+    );
+
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(239,68,68,.4);
+
+
+}
+
+
+
+.logout-button:hover{
+
+
+    box-shadow:
+
+
+    0 20px 40px rgba(239,68,68,.6);
+
+
+}
+
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+
+@media(max-width:600px){
+
+
+    .home-card{
+
+
+        width:85%;
+
+
+        padding:35px;
+
+
+    }
+
+
+
+    h1{
+
+
+        font-size:30px;
+
+
+    }
+
 
 }

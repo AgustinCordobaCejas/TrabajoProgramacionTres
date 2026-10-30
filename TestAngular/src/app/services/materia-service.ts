@@ -1,10 +1,14 @@
 
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { Materias } from '../interfaces/Materias';
 import { HttpClient } from '@angular/common/http';
 import { CrearMateriaDto } from '../interfaces/CrearMateriaDto';
+import { ActualizarMateriaDto } from '../interfaces/ActualizarMateriaDto';
+import { environment } from '../../environments/environment';
+import { PagedResult } from '../interfaces/PagedResult';
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +16,7 @@ import { CrearMateriaDto } from '../interfaces/CrearMateriaDto';
 export class MateriaService {
 
 
-  private ApiUrl: string = `${environment.apiUrl}/Materia`;
+  private readonly apiUrl = `${environment.apiUrl}/Materia`;
 
   constructor(
 
@@ -22,23 +26,36 @@ export class MateriaService {
 
   }
 
-  getAll(): Observable<Materias[]> {
-
-    return this.http.get<Materias[]>(this.ApiUrl);
+  getAll(page: number, pageSize: number, filter: string): Observable<PagedResult<Materias>> {
+    return this.http.get<PagedResult<Materias>>(this.apiUrl, {
+      params: { page, pageSize, filter },
+    });
 
   }
 
   getById(id: number): Observable<Materias> {
 
-    return this.http.get<Materias>(`${this.ApiUrl}/${id}`);
+    return this.http.get<Materias>(`${this.apiUrl}/${id}`);
 
   }
 
   CrearMateria(materia : CrearMateriaDto): Observable<Materias>{
 
-    return this.http.post<Materias>(this.ApiUrl, materia);
+    return this.http.post<Materias>(this.apiUrl, materia);
 
   }
+    update(id: number, materia:ActualizarMateriaDto ): Observable<void> {
+  
+      return this.http.put<void>(`${this.apiUrl}/${id}`, materia);
+  
+    }
+  
+    delete(id: number): Observable<void> {
+   
+      return this.http.delete<void>(`${this.apiUrl}/${id}`);
+      
+    }
+
 
 
 

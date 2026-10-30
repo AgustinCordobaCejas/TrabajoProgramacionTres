@@ -1,0 +1,101 @@
+.dialog-content{
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+
+    min-width:350px;
+
+
+}
+
+
+
+
+mat-form-field{
+
+
+    width:100%;
+
+
+}
+
+
+
+
+h2{
+
+
+    color:#1f2937;
+
+    font-weight:700;
+
+
+}
+
+
+
+
+
+.cancelar{
+
+
+    color:#6b7280;
+
+
+}
+
+
+
+
+
+.guardar{
+
+
+    background:linear-gradient(
+
+        135deg,
+
+        #0066ff,
+
+        #0047b3
+
+    );
+
+
+    color:white;
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+.guardar:hover{
+
+
+    transform:translateY(-2px);
+
+
+    box-shadow:
+
+    0 8px 18px rgba(0,102,255,.3);
+
+
+}
+
+
+
+.cancelar:hover{
+
+
+    background:#f3f4f6;
+
+
+}

@@ -1,0 +1,161 @@
+<div class="animated-gradient">
+
+  <!-- Fondo de partículas -->
+  <div class="particles"></div>
+
+
+  <div class="flip-container"
+       [class.flipped]="mostrarRegistro">
+
+
+    <div class="card">
+
+
+      <!-- LOGIN -->
+      <div class="front">
+
+
+        <h1>
+          Iniciar Sesión
+        </h1>
+
+
+        <form (ngSubmit)="login()">
+
+
+
+          <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="usuario.email"
+          name="email"
+          required>
+
+
+
+          <input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="usuario.password"
+          name="password"
+          required>
+
+
+
+          <button type="submit">
+            Ingresar
+          </button>
+
+
+        </form>
+
+
+
+        <p class="error">
+          {{mensaje}}
+        </p>
+
+
+
+        <p>
+          ¿No tienes cuenta?
+
+          <a href="javascript:void(0)"
+          (click)="voltearPagina()">
+
+            Registrarse
+
+          </a>
+
+        </p>
+
+
+      </div>
+
+
+
+
+
+      <!-- REGISTRO -->
+      <div class="back">
+
+
+        <h1>
+          Registrarse
+        </h1>
+
+
+
+        <form (ngSubmit)="registrar()">
+
+
+
+          <input
+          type="text"
+          placeholder="Nombre"
+          [(ngModel)]="nuevoUsuario.nombre"
+          name="nombre"
+          required>
+
+
+
+
+          <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="nuevoUsuario.email"
+          name="email"
+          required>
+
+
+
+
+          <input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="nuevoUsuario.password"
+          name="password"
+          required>
+
+
+
+
+          <button type="submit">
+
+            Crear cuenta
+
+          </button>
+
+
+
+        </form>
+
+
+
+
+        <p>
+
+          ¿Ya tienes cuenta?
+
+
+          <a href="javascript:void(0)"
+          (click)="voltearPagina()">
+
+            Iniciar sesión
+
+          </a>
+
+
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
